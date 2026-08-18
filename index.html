@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name Here</title>
+    <meta property="og:title" content="Your Name's Links" />
+    <meta property="og:site_name" content="yourdomain.com" />
+    <meta property="og:description" content="A list of Your Name's most important links." />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/app.css">
+    <script src="js/console.js"></script>
+    <script async defer src="https://cdn.tailwindcss.com"></script>
+    <meta name="theme-color" content="var(--bgColor)">
+</head>
+<body>
+<div id="particles-js"></div>
+<video id="bgVideo" autoplay muted loop playsinline>
+    <source src="video/Background.mp4" type="video/mp4">
+</video>
+<div id="enterOverlay">
+    <p>Click để vào trang</p>
+</div>
+    <!--Page Content, Don't forget to modify!-->
+<div class="box p-24 flex flex-col justify-center items-center ">
+    <img id="userPhoto" class="w-32 rounded-xl border " src="images/ANHPHUDEPZAIVCL.webp" alt="Your Name's Photo">
+   <div class="boxt-text flex flex-col justify-center items-center mt-8">
+  <!--Title and paragraph-->
+    <h1 class="">Trần Hoàng Phú</h1>
+<!--Socials for icons please refer to icons.getbootstrap.com for icons.-->
+    <div class="socials space-x-2 text-2xl mt-4 ">
+    <button id="social"><a id="sociallink" href="https://www.facebook.com/share/14k2VURtvZP/?mibextid=wwXIfr"><i class="bi bi-facebook"></i></a></button>
+    <button id="social"><a id="sociallink" href="https://github.com/phudepzai-coder"><i class="bi bi-github"></i></a></button>
+    <button id="social"><a id="sociallink" href="https://www.instagram.com/hoangphu7727?igsh=aDAyejBwcXg3ZThx&igsi=aDAyejBwcXg3ZThx&utm_source=qr"><i class="bi bi-instagram"></i></a></button>
+    <button id="social"><a id="sociallink" href="https://t.me/lenadxk"><i class="bi bi-telegram"></i></a></button>
+    <button id="social"><a id="sociallink" href="https://www.tiktok.com/@hongph74?_r=1&_t=ZS-98zPxwYVVpJ"><i class="bi bi-tiktok"></i></a></button>
+    <button id="social"><a id="sociallink" href="https://soundcloud.com/hoang-phu-246826768?utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing"><i class="fa-brands fa-soundcloud"></i></a></button>
+</div>   
+<div id="musicPlayer" class="music-player mt-6 w-full flex items-center gap-3 p-3">
+    <button id="prevBtn"><i class="bi bi-skip-start-fill"></i></button>
+    <button id="playBtn"><i class="bi bi-play-fill"></i></button>
+    <button id="nextBtn"><i class="bi bi-skip-end-fill"></i></button>
+    <div class="track-info flex-1">
+        <p id="trackName">My Song</p>
+        <div class="progress-bar" id="progressBar">
+            <div id="progressFill"></div>
+        </div>
+    </div>
+</div>
+<audio id="audioSource" preload="metadata"></audio>
+</div>
+</div>
+<script src="js/particles.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
