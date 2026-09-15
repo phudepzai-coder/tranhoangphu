@@ -1,121 +1,64 @@
-particlesJS('particles-js',
-{
-    "particles": {
-      "number": {
-        "value": 80,
-        "density": {
-          "enable": true,
-          "value_area": 800
-        }
-      },
-      "color": {
-        "value": "#ffffff"
-      },
-      "shape": {
-        "type": "circle",
-        "stroke": {
-          "width": 0,
-          "color": "#000000"
-        },
-        "polygon": {
-          "nb_sides": 5
-        },
-        "image": {
-          "src": "img/github.svg",
-          "width": 100,
-          "height": 100
-        }
-      },
-      "opacity": {
-        "value": 0.5,
-        "random": false,
-        "anim": {
-          "enable": false,
-          "speed": 1,
-          "opacity_min": 0.1,
-          "sync": false
-        }
-      },
-      "size": {
-        "value": 23.67442924896818,
-        "random": true,
-        "anim": {
-          "enable": false,
-          "speed": 40,
-          "size_min": 0.1,
-          "sync": false
-        }
-      },
-      "line_linked": {
-        "enable": false,
-        "distance": 150,
-        "color": "#ffffff",
-        "opacity": 0.4,
-        "width": 1
-      },
-      "move": {
-        "enable": true,
-        "speed": 6,
-        "direction": "none",
-        "random": false,
-        "straight": false,
-        "out_mode": "out",
-        "bounce": false,
-        "attract": {
-          "enable": false,
-          "rotateX": 600,
-          "rotateY": 1200
-        }
-      }
-    },
-    "interactivity": {
-      "detect_on": "canvas",
-      "events": {
-        "onhover": {
-          "enable": false,
-          "mode": "repulse"
-        },
-        "onclick": {
-          "enable": false,
-          "mode": "push"
-        },
-        "resize": true
-      },
-      "modes": {
-        "grab": {
-          "distance": 400,
-          "line_linked": {
-            "opacity": 1
-          }
-        },
-        "bubble": {
-          "distance": 400,
-          "size": 40,
-          "duration": 2,
-          "opacity": 8,
-          "speed": 3
-        },
-        "repulse": {
-          "distance": 200,
-          "duration": 0.4
-        },
-        "push": {
-          "particles_nb": 4
-        },
-        "remove": {
-          "particles_nb": 2
-        }
-      }
-    },
-    "retina_detect": false
-  }
+// ===== Snow effect =====
+(function () {
+    const container = document.getElementById('snow');
+    const canvas = document.createElement('canvas');
+    container.appendChild(canvas);
+    const ctx = canvas.getContext('2d');
 
-);
-const playlist = [
-    "ANH SAI ROI.mp3",
-    "DE DANH CHO EM.mp3",
-    "TIM THAY NHAU.mp3"
-];
+    const FLAKE_COUNT = 1000;
+    let flakes = [];
+
+    function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    function newFlake(startAnywhere) {
+        return {
+            x: Math.random() * canvas.width,
+            y: startAnywhere ? Math.random() * canvas.height : -10,
+            r: 0.6 + Math.random() * 2.4,            // kích thước bông tuyết
+            speed: 0.4 + Math.random() * 1.4,        // tốc độ rơi
+            sway: Math.random() * Math.PI * 2,       // pha đu đưa
+            swaySpeed: 0.005 + Math.random() * 0.02, // tốc độ đu đưa
+            swayAmp: 10 + Math.random() * 30,        // biên độ đu đưa
+            opacity: 0.3 + Math.random() * 0.7
+        };
+    }
+
+    for (let i = 0; i < FLAKE_COUNT; i++) {
+        flakes.push(newFlake(true));
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = '#ffffff';
+
+        for (const f of flakes) {
+            ctx.globalAlpha = f.opacity;
+            ctx.beginPath();
+            ctx.arc(f.x + Math.sin(f.sway) * f.swayAmp, f.y, f.r, 0, Math.PI * 2);
+            ctx.fill();
+
+            f.y += f.speed;
+            f.sway += f.swaySpeed;
+
+            // Bông tuyết rơi xuống đáy thì quay lên trên đầu
+            if (f.y > canvas.height + 10) {
+                Object.assign(f, newFlake(false));
+            }
+        }
+
+        ctx.globalAlpha = 1;
+        requestAnimationFrame(draw);
+    }
+    draw();
+})();
+
+// ===== Music player =====
+// Playlist được nạp từ js/playlist.js (chạy update-playlist.bat để cập nhật)
 let currentTrack = 0;
 
 const audio = document.getElementById('audioSource');
